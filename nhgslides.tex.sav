@@ -1,0 +1,451 @@
+
+\documentclass[CJK,notheorems,compress,mathserif,table]{beamer}
+%\usepackage{beamerthemeshadow}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+
+
+
+
+\useoutertheme[hideothersubsections]{sidebar}
+\usefonttheme{serif}
+
+\mode<presentation>
+{
+%  \usetheme{NUHAG}
+%  \usetheme{Antibes}
+%  \usetheme{Bergen}
+%  \usetheme{Berkeley}
+%  \usetheme{Berlin}
+%  \usetheme{Boadilla}
+%  \usetheme{Copenhagen}
+%  \usetheme{Darmstadt}
+%  \usetheme{default}
+%  \usetheme{Dresden}
+%  \usetheme{Frankfurt}
+%  \usetheme{Goettingen}
+%  \usetheme{Hannover}
+%  \usetheme{Ilmenau}
+%  \usetheme{JuanLesPins}
+%  \usetheme{Luebeck}
+%  \usetheme{Madrid}
+%  \usetheme{Malmoe}
+%  \usetheme{Marburg}
+%  \usetheme{Montpellier}
+  \usetheme{PaloAlto}
+%  \usetheme{Pittsburgh}
+%  \usetheme{Rochester}
+%  \usetheme{Singapore}
+%  \usetheme{Szeged}
+%  \usetheme{Warsaw}
+
+%\usecolortheme{seahorse}
+%\usecolortheme{rose}
+
+\mode <all>
+
+
+}
+
+
+
+%\usepackage{beamerthemesplit}
+\usepackage{CJK}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{manfnt}
+\usepackage{times}
+\usepackage{type1cm}
+\beamertemplateshadingbackground{yellow!20}{structure!10}
+\beamertemplatesolidbackgroundcolor{yellow!10!structure!10}
+
+
+\begin{document}
+\begin{CJK*}{GBK}{hei}
+\newcommand{\song}{\CJKfamily{song}}
+\newcommand{\hei}{\CJKfamily{hei}}
+\newcommand{\fs}{\CJKfamily{fs}}
+\newcommand{\ks}{\CJKfamily{kai}}
+\newcommand{\li}{\CJKfamily{li}}
+\newcommand{\you}{\CJKfamily{you}}
+\newcommand{\fzcy}{\CJKfamily{fzcy}}
+\newcommand{\fzfs}{\CJKfamily{fzfs}}
+\newcommand{\red}{\color{red}}
+\setbeamerfont{title}{size=\large}
+\setbeamerfont{subtitle}{size=\large}
+
+\def\hilite<#1>{\temporal<#1>{\color{blue!35}}{\color{magenta}}{\color{blue!75}}}
+\newcolumntype{H}{>{\columncolor{blue!20}}c!{\vrule}}
+\newcolumntype{H}{>{\columncolor{blue!20}}c}
+
+
+
+\title[随机环境中带分散自适应牵制控制的复杂网络簇同步问题]{{\color{yellow}随机环境中带分散自适应牵制控制的复杂网络簇同步问题}}
+\author{\textsc{\ks\bf 指导老师~~~董海玲~副教授}}
+
+\institute[]{\fs\bf
+  答辩人~~~~~叶丹凤\\\vskip7pt
+  专业~~~~~统计学\\\vskip7pt
+   学号~~~~2130090403
+}
+\date{}
+
+
+%\logo{\includegraphics[scale=1]{logo5.pdf}}
+
+
+\colorlet{mystruct}{structure} % 保存当前的structure
+\colorlet{structure}{magenta} % 新建structure
+\usestructuretemplate{\color{structure}}{} % \structure{..}
+\beamertemplateshadingbackground{yellow!10}{magenta!10} % 新背景
+
+\logo{\includegraphics[scale=0.3]{1.jpg}}
+
+\frame{\frametitle{\normalsize{ {} }}
+\titlepage
+}
+
+\author{ {叶丹凤 }}
+\title{深圳大学}
+
+
+\logo{\includegraphics[scale=0.32]{1.jpg}}
+
+
+\frame{ \frametitle{论文结构}\transsplithorizontalin
+\setcounter{tocdepth}{2}
+      \tableofcontents
+}
+
+
+
+
+
+
+
+\section{研究背景及意义}
+
+\frame{\linespread{1.3} \frametitle{\secname}
+\transsplithorizontalin\large\song\rm
+
+\begin{itemize}
+\item  研究背景 \\
+  复杂网络在自然界和社会中普遍存在，比如物联网、电力网、交通网、WWW网络、食物链网络、社会关系网等等。例如，计算机网络可以看作是自主工作的计算机通过通信介质如光缆、双绞线、同轴电缆相互连接形成的网络。因此，对复杂网络的研究具有重要的意义。
+  \begin{center}
+\scalebox{0.7}
+{\includegraphics[totalheight=5cm]{wangluo.jpg}
+}
+
+\end{center}
+\end{itemize}
+}
+
+
+\frame{\linespread{1.5} \frametitle{\secname}
+\transsplithorizontalout\small\ks\rm
+\begin{itemize}
+\item  现实意义:
+
+  复杂网络被广泛应用在许多不同领域之中，例如生物学、保密通信、医学、图像处理等等。我们可以把基因调控网络看作是不同的基因通过调控与被调控关系构成的网络；万维网可以看做由站点和超链接组成的复杂网络；还有各种经济与金融网络、神经网络和新陈代谢网络、电力网络，可见网络无处不在。
+
+
+\end{itemize}
+}
+
+
+\frame{\linespread{1.5} \frametitle{\secname}
+\transsplithorizontalout\small\ks\rm
+\begin{itemize}
+\item  理论意义:
+
+网络科学作为一个跨学科广泛交叉的新兴领域，融合了数学、统计物理、信息科学和社会学的相关知识，它既是数学中经典图论和随机图论的延伸，也是系统科学和复杂性科学的创新发展。对复杂网络的定量及定性特征的科学解释，已成为网络时代研究工作中一个极其重要的挑战性课题。
+
+
+
+\end{itemize}
+}
+
+
+\section{研究现状}
+\frame{\linespread{1.5} \frametitle{\secname}
+\transsplithorizontalin\small\ks\rm
+
+\begin{itemize}
+\item
+  近年来，复杂网络同步行为的研究吸引了各个领域科学研究者的兴趣。所谓同步，是指两个或者多个动力系统，经过系统间的相互影响或者外力作用，在一定的初始状态下经过自身演化机制，各节点的动力系统状态逐步接近，最后达到相同的状态。如萤火虫的同步发光，钟摆的相位同步，管弦乐队小提琴的协同，激光发生器的同步性及剧场中观众鼓掌频率的逐渐同步等等。
+\end{itemize}
+}
+
+\frame{\linespread{1.5} \frametitle{\secname}
+\transsplithorizontalin\small\ks\rm
+
+\begin{center}
+\scalebox{0.7}
+{\includegraphics[totalheight=5cm]{yinghuochong.jpg}\quad
+\includegraphics[totalheight=5cm]{wuzhe.jpg}
+}\\
+\large  图1\,\, 萤火虫的同步发光\qquad 图2\,\,
+花式游泳动作逐渐同步
+\end{center}
+}
+
+\frame{\linespread{1.5} \frametitle{\secname}
+\transsplithorizontalin\small\ks\rm
+
+\begin{center}
+\scalebox{0.7}
+{\includegraphics[totalheight=9.5cm]{buhuo.JPG}
+}
+\large  \,\, 复杂网络的主要研究方向
+\end{center}
+}
+
+
+\frame{\linespread{1.5} \frametitle{\secname}
+\transsplithorizontalin\small\ks\rm
+
+
+\begin{itemize}
+\item 随着对同步现象的广泛研究，出现了各种不同形式的同步模式，比如完全同步，相位同步，迟滞同步和分簇同步等等。近年来很多学者致力于研究复杂网络的簇同步问题，由于网络簇结构是复杂网络最普遍和最重要的拓扑结构属性之一。该同步在工程控制、环境科学、信息通信中更具有普遍性。
+
+\begin{center}
+\scalebox{0.7}
+{\includegraphics[totalheight=5cm]{fencu.jpg}
+}\\
+\tiny  图3\,\, 分簇的无线传感器网络结构
+
+\end{center}
+\end{itemize}
+}
+
+
+\section{主要内容}
+
+\frame{ \linespread{1.25} \frametitle{\secname}\transsplithorizontalin\ks\rm
+
+\begin{itemize}
+\item
+ 同步的定义：记网络中节点$i$的状态向量$x_i(t),i=1,2,\ldots,N$.$s_k(t)$为第$k$簇$C_k$的目标函数，其中$C_{k}=\{l_{k-1}+1,\ldots, l_{k}\},k=1,2,\ldots,d$. 若
+\begin{equation}
+  \lim_{t\rightarrow\infty}\sum_{k=1}^d \sum_{i\in C_{k}}||x_i(t)-s_k(t)|| = 0, \quad i = 1, . . . ,N.
+  \end{equation}
+成立，则网络达到簇同步。
+\item 研究的方法是牵制控制，它的基本思想是：通过有选择地对网络中的少部分节点施加控制，由此牵一发而动全身，从而使得整个网络达到同步的目的。
+
+\end{itemize}
+}
+
+
+\frame{ \linespread{1.25} \frametitle{\secname}\transsplithorizontalin\ks\rm
+
+\begin{itemize}
+\item 第一章：考虑在三种不同控制器下研究带有非恒同节点非线性耦合复杂网络的簇同步问题，研究的模型如下：
+\begin{align}
+        \dot{x}_i(t) &=f_{k}(x_i(t),t)+\sum_{j=1}^N c_{ij}(t)a_{ij}g(x_j(t))+u_i(t), \notag \\
+        \dot{c}_{ij}(t)&=h_{ij}a_{ij}k_{ij}(x_i(t)-x_j(t))^{T}P(x_i(t)-x_j(t)), \notag \\
+         \dot{c}_i(t)&=h_{i}k_{i}(x_i(t)-s_{\hat{i}}(t))^{T}P(x_i(t)-s_{\hat{i}}(t)).
+ \end{align}
+ 其中$x_i(t) = (x^{1}_{i}(t),x^{2}_{i}(t),\ldots, x^{n}_{i}(t))^T \in R^n$是系统中第$i$个节点的状态变量；$f_{k}: R^n \times [0,+\infty)\rightarrow R^n$ 是代表每个簇中节点的动力学行为的连续向量值函数；$g(x_i(t))=(g_{1}(x^{1}_{i}(t)),g_{2}(x^{2}_{i }(t)),\ldots, g_{n}(x^{n}_{i}(t)))^T$ 是非线性耦合连续函数；对称矩阵$A = (a_{ij}) \in R^{N \times N}$是代表网络的耦合结构，元素满足行和为零；
+ \end{itemize}
+}
+
+
+\frame{ \linespread{1.25} \frametitle{\secname}\transsplithorizontalin\ks\rm
+
+
+    $c_{ij}(t)>0$和$c_i(t)>0$分别表示节点之间时变的耦合强度和时变反馈控制增益；若节点$i$ 和$j$ 在同一个簇内，则有$h_{ij}=1$，否则$h_{ij}=0$；若节点$i$被选择牵制，那么$h_i=1$，否则$h_i=0$.其中$u_i(t)$是外加控制器，讨论以下三种形式：
+
+}
+
+\frame{ \frametitle{\secname}\transsplithorizontalin\scriptsize\rm
+
+\begin{itemize}
+\item 线性反馈控制器：$u_i(t)=h_{i}c_{i}(t)(s_{\hat{i}}(t)-x_{i}(t))$
+
+   非线性反馈控制器：$u_i(t)=h_{i}c_{i}(t)(g(s_{\hat{i}}(t))-g(x_{i}(t)))$
+
+   随机发生的控制器：
+   \begin{equation}
+   u_i(t)=h_{i}c_{i}(t)\rho_i(t)(s_{\hat{i}}(t)-x_{i}(t))
+   \end{equation}
+  其中$\rho_i(t)$是贝努利随机变量，可以用以下随机事件来描述：
+
+
+  \begin{displaymath}
+   \left\{ \begin{array}{ll}
+  \hbox{事件1: $(3)$式的控制器是有效的}\\
+  \hbox{事件2: $(3)$式的控制器是无效的}
+    \end{array}\right.
+  \end{displaymath}
+   那么$\rho(t)$的分布列可以表示为
+
+   \begin{displaymath}
+   \rho(t) = \left\{ \begin{array}{ll}
+  $1$: \hbox{事件$1$发生}\\
+  $0$: \hbox{事件$2$发生}
+    \end{array}\right.
+  \end{displaymath}
+  并且$E(\rho(t))=\rho \in (0,1)$.
+ \end{itemize}
+}
+
+
+\frame{ \frametitle{\secname}\transsplithorizontalin\scriptsize\rm
+
+\begin{itemize}
+\item 如果存在一个正定对角矩阵$P=\text{diag}\{p_1,p_2,\ldots,p_n\}$,对角矩阵$\Delta=\text{diag}\{\delta_1,\delta_2,\ldots,\delta_n\}$,和一个正常数$\omega$,使得一致连续函数$f(x,t)$满足以下不等式：
+    $$(x-y)^TP\bigl((f(x,t)-f(y,t))-\Delta(x-y)\bigr)\leq -\omega(x-y)^T(x-y)$$
+    对任意的$x,y \in R^n$都成立，则有$f(x,t) \in \text{QUAD}(P,\Delta,\omega)$.
+\item 假设$2$:我们假定存在一个$N \times N$的对称矩阵
+
+
+\begin{displaymath}
+        \mathbf{A}=
+         \left( \begin{array}{cccc}
+            A_{11} & A_{12} & \cdots & A_{1d} \\
+            A_{21} & A_{22} & \cdots & A_{2d} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            A_{d1} & A_{d2} & \cdots & A_{dd} \\
+         \end{array} \right)
+        \end{displaymath}
+其中不同簇的分块矩阵$A_{\alpha \beta} = (z_{ij}) \in R^{k_{\alpha }\times k_{\beta }}(\alpha,\beta=1,\ldots,d)$的元素满足行和为零，而同一簇的矩阵$A_{\alpha \alpha} = (s_{ij}) \in R^{k_{\alpha }\times k_{\alpha }}$不但满足行和为零而且还是对称的，非对角元素都是大于等于零的数，而且 $k_{\alpha }$ and $k_{\beta }$ 是代表第$\alpha$簇和第$\beta$簇的节点总数量.
+ \end{itemize}
+}
+
+\frame{ \frametitle{\secname}\transsplithorizontalin\scriptsize\rm
+
+\begin{itemize}
+\item 我们已经做出了外加线性反馈控制器时的模型达到簇同步的条件，也就是先考虑这样一个复杂网络的模型：
+  \begin{equation}
+  \dot{x}_i(t)=f_{k}(x_i(t),t)+\sum_{j=1}^N c_{ij}(t)a_{ij}g(x_j(t))+h_{i}c_{i}(t)(s_{\hat{i}}(t)-x_{i}(t))
+  \end{equation}
+  得到的主要结果是：在自适应策略下，如果存在一个常数$m$，使得以下不等式：
+  \begin{equation}
+   m> \frac{\delta_{\alpha}+\frac{c^2 \lambda _{max}(U)}{2\theta}+ \varepsilon^2 \theta (1-\frac{1}{N})+\eta (d-1)max_{\alpha,\beta}[k_{\alpha},k_{\beta}]max_{i,j}|a_{ij}c_{ij}|}{min_{\alpha}\lambda(H_{\alpha \alpha}-\eta A_{\alpha \alpha})}
+  \end{equation}
+  成立，那么所研究的网络模型$(4)$达到簇同步。
+  \end{itemize}
+}
+
+\frame{ \frametitle{\secname}\transsplithorizontalin\scriptsize\rm
+
+\begin{itemize}
+\item 我们也得出了外加非线性反馈控制器时的模型达到簇同步的条件，也就是先考虑这样一个复杂网络的模型：
+  \begin{equation}
+  \dot{x}_i(t)=f_{k}(x_i(t),t)+\sum_{j=1}^N c_{ij}(t)a_{ij}g(x_j(t))+h_{i}c_{i}(t)(g(s_{\hat{i}}(t))-g(x_{i}(t)))
+  \end{equation}
+  得到的主要结果是：在自适应策略下，如果存在一个常数$m$，使得以下不等式：
+  \begin{equation}
+   m> \frac{\delta_{\alpha}+\frac{c^2 \lambda _{max}(U)}{2\theta}+ \varepsilon^2 \theta (1-\frac{1}{N})+\eta (d-1)max_{\alpha,\beta}[k_{\alpha},k_{\beta}]max_{i,j}|a_{ij}c_{ij}|}{min_{\alpha}\lambda(\xi H_{\alpha \alpha}-\eta A_{\alpha \alpha})}
+  \end{equation}
+  成立，那么所研究的网络模型$(4)$达到簇同步。可以看出这两种不同控制器下得到网络同步的条件是差不多的。
+  \end{itemize}
+}
+
+
+
+\section{创新点}
+
+\frame{\linespread{1.5} \frametitle{\secname}
+\transsplithorizontalin\small\ks\rm
+
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{fig1.pdf}\quad
+\includegraphics[totalheight=6cm]{fig2.pdf}
+}\\
+\large  图4\,\, 模型$(4)$的状态向量 \qquad 图5\,\,
+模型$(4)$的误差向量
+\end{center}
+}
+
+
+\frame{\linespread{1.5} \frametitle{\secname}
+\transsplithorizontalin\small\ks\rm
+
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{fig3.pdf}\quad
+\includegraphics[totalheight=6cm]{fig4.pdf}
+}\\
+\large  图6\,\, 模型$(4)$的耦合强度 \qquad 图7\,\,
+模型$(4)$的控制增益
+\end{center}
+}
+
+
+\frame{\linespread{1.5} \frametitle{\secname}
+\transsplithorizontalin\small\ks\rm
+
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{feixianxing.jpg}
+}\\
+\large  图8\,\, 模型$(6)$的状态向量
+\end{center}
+}
+
+\section{}
+
+\frame{ \frametitle{\secname}\transsplithorizontalin\scriptsize\rm
+
+\begin{itemize}
+\item 第二章考虑的是带有马氏跳和随机发生的控制下的线性耦合复杂网络的簇同步问题，研究的网络模型如下：
+ \begin{equation}
+ dx_i(t)=\Big[f_{k}(x_i(t),t)+\sum_{j=1}^N c_{ij}(t)a_{ij}(r(t))x_j(t)+h_{i}c_{i}(t)\rho_i(t)(s_{\hat{i}}(t)-x_{i}(t))\Big]dt
+ \end{equation}
+ 其中假设$r(t)$是一个齐次马尔可夫链，而且网络的外耦合结构受马氏链的影响继而不断地切换.
+\item 最后我们再考虑带有布朗运动和马氏调制的线性耦合复杂网络的簇同步问题，研究的网络模型如下：
+\begin{align}
+ dx_i(t)=& \Big[f_{k}(x_i(t),t)+\sum_{j=1}^N c_{ij}(t)a_{ij}(r(t))x_j(t)+h_{i}c_{i}(t)\rho_i(t)(s_{\hat{i}}(t)-x_{i}(t))\Big]dt  \notag \\
+        +& \sigma(x_i(t),t)dw_i(t)
+ \end{align}
+ 其中$\sigma(x_i(t),t)$是随机扰动的函数，$w(t)$代表的是布朗运动，也叫做维纳过程并满足：
+ $$E{dw_i(t)}=0$$
+ $$E\{[dw_i(t)]^2\}=dt$$
+ 它的微分形式满足：$dw(t)\cdot dw(t)=dt$,\quad $dw(t)\cdot dt=0$,\quad $dt \cdot dt=0 $.
+ \end{itemize}
+ }
+
+
+
+\section{总结与展望}
+\frame{\linespread{1.5} \frametitle{\secname}  \transwipe\small\rm
+\begin{itemize}
+\item 此系统考虑的是非恒同节点和非线性耦合结构的，由于现实生活当中，有许多状态变量是无法直接观测到的，只能观测这个变量的函数值，因此很有必要研究非线性耦合复杂网络的簇同步问题；
+\item 考虑用三种不同形式的牵制控制策略使带有非恒同节点的非线性耦合网络达到同步；
+\item 考虑的是带马氏调制的系统，耦合结构是动态的，可以在有限个状态之间切换；
+\item 考虑同时具有马氏切换和随机扰动对系统的影响，噪声在我们的生活中无处不在，考虑噪声的影响会使我们的研究成果更贴近实际，更有实际应用价值。
+\end{itemize}
+
+}
+
+\section*{}
+\frame{ \frametitle{\secname}\scriptsize\ks\rm \linespread{1.3}
+
+\begin{itemize}
+\item{} Su,H.S.,Rong,Z.H,Michael Z.Q,Chen,Wang,X.F.,Chen,G.R.: Decentralized Adaptive Pinning Control for Cluster Synchronization of Complex Dynamical Networks. IEEE Transactions on Cybernetics.2013,43(1), 394-399.
+\item{} Wang,J.Y.,Feng,J.W.,Xu,C.,Zhao,Y.: Cluster synchronization of nonlinearly-coupled complex networks with non-identical nodes and  asymmetrical coupling matrix. Nonlinear Dyn.2012, 67,1635-1646.
+\item{}  Wang,Y.L.,Cao,J.D.: Cluster synchronization in nonlinearly coupled delayed networks of non-identical dynamic systems. Nonlinear Analysis: Real World Application.2013,14, 842-851.
+\item {}Zhu, Quanxin, and Jinde Cao. "Exponential stability of stochastic neural networks with both Markovian jump parameters and mixed time delays."Systems, Man, and Cybernetics, Part B: Cybernetics, IEEE Transactions on41.2 (2011): 341-353.
+\item {}Wang, Yao, et al. "Synchronization of stochastic genetic oscillator networks with time delays and Markovian jumping parameters." Neurocomputing 73.13 (2010): 2532-2539.
+
+\item{} Aihua, Hu,Jinde Cao, Manfeng Hu,Liuxiao Guo. Cluster synchronization in directed networks of non-identical systems with noises via random pining control. Physica A 395(2014)537-548.
+
+
+\end{itemize}
+
+}
+
+
+
+
+\frame{
+\begin{center}
+\color{red}\LARGE{谢谢各位老师的指导!!!}
+\end{center}
+ }
+
+ \end{CJK*}
+\end{document}

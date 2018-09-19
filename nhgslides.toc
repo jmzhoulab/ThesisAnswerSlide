@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.14pt}
+\beamer@sectionintoc {1}{研究背景及现状}{3}{0}{1}
+\beamer@sectionintoc {2}{主要内容}{9}{0}{2}
+\beamer@subsectionintoc {2}{1}{第3章\nobreakspace {}分散式事件激发采样下带马氏切换的非线性随机耦合网络同步问题}{10}{0}{2}
+\beamer@subsectionintoc {2}{2}{第4章\nobreakspace {}集中式事件激发采样下带部分未知转移率和时滞的复杂网络同步问题}{26}{0}{2}
+\beamer@subsectionintoc {2}{3}{第5章\nobreakspace {}基于事件激发采样带部分未知转移率和布朗运动的复杂网络同步问题}{37}{0}{2}
+\beamer@sectionintoc {3}{创新点}{46}{0}{3}
+\beamer@sectionintoc {4}{总结与展望}{47}{0}{4}
+\beamer@sectionintoc {5}{研究成果}{49}{0}{5}

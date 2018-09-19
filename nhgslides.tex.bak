@@ -1,0 +1,919 @@
+
+\documentclass[CJK,notheorems,compress,mathserif,table]{beamer}
+%\usepackage{beamerthemeshadow}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+
+
+
+
+\useoutertheme[hideothersubsections]{sidebar}
+\usefonttheme{serif}
+
+\mode<presentation>
+{
+%  \usetheme{NUHAG}
+% \usetheme{Antibes}
+%  \usetheme{Bergen}
+%  \usetheme{Berkeley}
+%  \usetheme{Berlin}
+%  \usetheme{Boadilla}
+%  \usetheme{Copenhagen}
+%  \usetheme{Darmstadt}
+%  \usetheme{default}
+%  \usetheme{Dresden}
+  \usetheme{Frankfurt}  %yes
+%  \usetheme{Goettingen}
+%  \usetheme{Hannover}
+%  \usetheme{Ilmenau}
+%  \usetheme{JuanLesPins}
+%  \usetheme{Luebeck}
+%  \usetheme{Madrid}
+%  \usetheme{Malmoe}
+%  \usetheme{Marburg}
+%  \usetheme{Montpellier}
+%  \usetheme{PaloAlto}
+%  \usetheme{Pittsburgh}
+%  \usetheme{Rochester}
+%  \usetheme{Singapore}
+%  \usetheme{Szeged}     %yes
+%  \usetheme{Warsaw}
+
+%\usecolortheme{seahorse}
+%\usecolortheme{rose}
+
+\mode <all>
+
+
+}
+
+
+
+%\usepackage{beamerthemesplit}
+\usepackage{CJK}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{amsfonts}
+\usepackage{manfnt}
+\usepackage{times}
+\usepackage{type1cm}
+\usepackage{bm}
+\beamertemplateshadingbackground{yellow!20}{structure!10}
+\beamertemplatesolidbackgroundcolor{yellow!10!structure!10}
+
+
+
+\begin{document}
+\begin{CJK*}{GBK}{hei}
+\newcommand{\song}{\CJKfamily{song}}
+\newcommand{\hei}{\CJKfamily{hei}}
+\newcommand{\fs}{\CJKfamily{fs}}
+\newcommand{\ks}{\CJKfamily{kai}}
+\newcommand{\li}{\CJKfamily{li}}
+\newcommand{\you}{\CJKfamily{you}}
+\newcommand{\fzcy}{\CJKfamily{fzcy}}
+\newcommand{\fzfs}{\CJKfamily{fzfs}}
+\newcommand{\red}{\color{red}}
+\setbeamerfont{title}{size=\large}
+\setbeamerfont{subtitle}{size=\large}
+
+
+\def\hilite<#1>{\temporal<#1>{\color{blue!35}}{\color{magenta}}{\color{blue!75}}}
+\newcolumntype{H}{>{\columncolor{blue!20}}c!{\vrule}}
+\newcolumntype{H}{>{\columncolor{blue!20}}c}
+
+\graphicspath{{figures/}}
+
+\newcommand\chapthree{第3章~分散式事件激发采样下带马氏切换的非线性随机耦合网络同步问题}
+\newcommand\chapfour{第4章~集中式事件激发采样下带部分未知转移率和时滞的复杂网络同步问题}
+\newcommand\chapfive{第5章~基于事件激发采样带部分未知转移率和布朗运动的复杂网络同步问题}
+\newcommand\inden{~~~~~~~~}
+
+
+\title[基于事件激发采样随机环境中复杂网络同步问题研究]{{\color{yellow}基于事件激发采样随机环境中复杂网络同步问题研究}}
+%\author{\textsc{\ks\bf 指导老师~~~董海玲~副教授}}
+
+\institute[]{\fs\bf
+  答辩人~~~~周家木~~~~~~~~~~~~~~~~~~~~\\\vskip7pt
+  专~~~~业~~~~统计学~~~~~~~~~~~~~~~~~~~~\\\vskip7pt
+  导~~~~师~~~~董海玲~副教授~~~~~~\\\vskip14pt
+  深圳大学数学与统计学院~
+}
+
+\date{\footnotesize ~~~\\~~~\\~~\\~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~2017-5-11}
+
+
+%\logo{\includegraphics[scale=1]{logo5.pdf}}
+
+
+\colorlet{mystruct}{structure} % 保存当前的structure
+\colorlet{structure}{magenta} % 新建structure
+\usestructuretemplate{\color{structure}}{} % \structure{..}
+\beamertemplateshadingbackground{yellow!10}{magenta!10} % 新背景
+
+%\logo{\includegraphics[scale=0.3]{1.jpg}}
+
+\frame{\frametitle{\normalsize{ {} }}
+\titlepage
+}
+
+\author{{周家木}}
+\title{基于事件激发采样随机环境中复杂网络同步问题研究}
+
+
+%\logo{\includegraphics[scale=0.12]{1.jpg}}
+
+
+\frame{\frametitle{提纲}\transsplithorizontalin
+\setcounter{tocdepth}{2}
+      \tableofcontents
+}
+
+
+\section{研究背景及现状}
+
+\frame{\linespread{1.3} \frametitle{\secname}\transsplithorizontalin\small\song\rm
+  \quad\quad 复杂网络在自然界和社会中普遍存在，比如物联网、电力网、交通网、WWW网络、食物链网络、社会关系网等等。例如，计算机网络可以看作是自主工作的计算机通过通信介质如光缆、双绞线、同轴电缆相互连接形成的网络。
+\begin{center}
+\scalebox{0.7}
+{\includegraphics[totalheight=5cm]{foodchain.jpg}
+\includegraphics[totalheight=5cm]{shehui.jpg}
+}\\
+\tiny  图1\,\, 食物链~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\quad\quad\qquad\quad\quad\qquad 图2\,\,
+明星关系网
+\end{center}
+}
+
+\subsection{}
+\frame{\linespread{1.3} \frametitle{\small 同步现实背景}\transsplithorizontalin\small\song\rm
+\quad\quad 近年来，复杂网络同步行为的研究吸引了各个领域科学研究者的兴趣。所谓同步，是指两个或者多个动力系统，经过系统间的相互影响或者外力作用，在一定的初始状态下经过自身演化机制，各节点的动力系统状态逐步接近，最后达到相同的状态。如萤火虫的同步发光，钟摆的相位同步，管弦乐队小提琴的协同，激光发生器的同步性及剧场中观众鼓掌频率的逐渐同步等等。
+\begin{center}
+\scalebox{0.7}
+{\includegraphics[totalheight=5cm]{yinghuochong.jpg}\quad
+\includegraphics[totalheight=5cm]{consent.jpg}
+}\\
+\tiny  图3\,\, 萤火虫的同步发光~~~~~~~~~\quad\quad\qquad\quad\quad\qquad 图4\,\,
+演唱会观众手势逐渐同步
+\end{center}
+}
+
+
+\frame{ \frametitle{\small 随机环境下同步研究现状}\transsplithorizontalin\scriptsize\rm\song
+随机环境下复杂网络同步问题主要研究主题:
+\begin{itemize}
+ \item （一） 运用连续时间马尔可夫链来模拟耦合结构受随机环境影响而切换的变化过程\cite{p11Markovian,M20};
+ \item （二） 引入随机变量来刻画耦合强度的随机性以及随机发生的耦合关系\cite{X18,randomcoupling1};
+ \item （三） 通过布朗运动来模拟随机噪声对网络节点自身以及节点之间信号传输过程的干扰\cite{p29,p32}.
+  \end{itemize}
+  ~\\
+  ~\\
+  \begin{thebibliography}{1}
+  \tiny
+  \bibitem{p11Markovian} Y.~Han, W.~Lu, Z.~Li, T.~Chen. Pinning dynamic systems of networks with {M}arkovian switching couplings and controller node set[J]. {\em Systems \& Control Letters}, 2014, 65(1):56-63.
+  \bibitem{M20} Z. Li, J Park, Z Wu. Synchronization of complex networks with nonhomogeneous Markov jump topology[J]. {\em Nonlinear Dynamics}, 2013, 74:65-75.
+
+
+  \bibitem{X18} X.~Yang, J.~Cao, J.~Lu. Synchronization of randomly coupled neural networks with {M}arkovian jumping and time-delay[J]. {\em IEEE Transactions on Circuits \& Systems I Regular Papers}, 2013, 60(2):363-376.
+  \bibitem{randomcoupling1} X.~Yang, J.~Cao, J.~Lu. Synchronization of {M}arkovian coupled neural networks with nonidentical node-delays and random coupling strengths[J]. {\em IEEE Transactions on Neural Networks and Learning Systems}, 2012, 23(1):60-71.
+
+  \bibitem{p29} X. Yang, J. Cao, J. Lu. Synchronization of delayed complex dynamical networks with impulsive and stochastic effects[J]. {\em Nonlinear Analysis Real World Applications}, 2011, 12(4):2252–2266.
+  \bibitem{p32}{A. Hu, J. Cao, M. Hu, L. Guo. Cluster synchronization in directed networks of non-identical systems with noise via random pinning control[J]. {\em Physica A Statistical Mechanics \& Its Applications}, 2014, 395(4):537-548.}
+
+  \end{thebibliography}
+}
+
+
+\frame{ \frametitle{\small 随机影响模式}\transsplithorizontalin\small\song\rm     %\transsplithorizontalin\scriptsize\rm\song
+\begin{itemize}
+    \item  随机噪声\\
+    \item  随机发生的耦合\\
+    \item  随机耦合强度\\
+    \item  转移率已知+未知的马氏链\\
+    \item  随机发生的控制\\
+    \item  随机控制增益\\
+  \end{itemize}
+}
+
+
+\frame{ \frametitle{\small 事件激发采样研究现状}\transsplithorizontalin\small\song\rm
+~~~~~~~~事件激发采样模式的主要思想是: 当系统节点与同步目标之间的偏差大于给定的阈值时, 此时事件被触发, 节点就更新自身的状态和控制项, 并向邻居节点传递信息.
+换句话说, 网络节点的信息更新和信号的传输只发生在事件激发时刻.\\
+~\\
+
+~~~~~~~~事件激发采样策略的核心在于根据网络节点间的关系定义激发规则.
+按照激发时刻是否一致可以分为: {\textbf{集中式激发规则}}和{\textbf{分散式激发规则}};
+按照监控时间是否连续可以分为: {\textbf{连续监控激发规则}}和{\textbf{离散监控激发规则}}.
+
+\footnote{
+\begin{thebibliography}{1}
+\tiny
+\bibitem{eventaddav}
+H.~Li, X.~Liao, G.~Chen, D.~Hill, Z.~Dong, and T.~Huang. Event-triggered asynchronous intermittent communication strategy for synchronization in complex dynamical networks. {\em Neural Networks}, 66:1--10, 2015.
+\bibitem{A-linear-event-triggered}
+W.~Lu, Y.~Han, and T.~Chen. Synchronization in networks of linearly coupled dynamical systems via event-triggered diffusions.{\em IEEE Transactionsons on Neural Networks and Learning Systems},
+  page online, 2015.
+\end{thebibliography}
+}
+}
+
+
+\frame{ \frametitle{\small 基于事件激发采样策略的同步问题研究现状}\transsplithorizontalin\scriptsize\rm\song
+\begin{thebibliography}{1}
+\tiny
+\bibitem{eventMarkov3}
+X. Liu, G.i Xiao, W.. Tay, G. Ma, H. Xi.
+Synchronization of pinning networks with Markovian switching topologies and event-triggered communication[C]. Guilin, China. 2016. {\em World Congress on Intelligent Control \& Automation}, 2016:2642-2647.
+
+\bibitem{eventMarkov0}
+邵浩宇, 胡爱花, 刘丹.
+Synchronization of Markovian jumping complex networks with event-triggered control[J]. {\em Chinese Physics B}, 2015, 24(9):595-602.
+
+\bibitem{eventMarkov2}
+A. Wang, T. Dong, X. Liao.
+Event-triggered synchronization strategy for complex dynamical networks with the Markovian switching topologies[J]. {\em Neural Networks}, 2016, 74:52–57.
+
+\bibitem{eventsyn2} W. Lu, Y. Han, T. Chen. Synchronization in networks of linearly coupled dynamical systems via event-triggered diffusions[J]. {\em IEEE Transactions on Neural Networks and Learning Systems}, 2015, 26(12):3060-3069.
+
+\bibitem{eventsyn7} W. Lu, Y. Han, T. Chen. Pinning networks of coupled dynamical systems with Markovian switching couplings and event-triggered diffusions[J]. {\em Journal of the Franklin Institute}, 2015, 352(9):3526-3545.
+
+
+\bibitem{eventdelay1}
+S. Senan, M. Ali, R. Vadivel b, S. Arik.
+Decentralized event-triggered synchronization of uncertain Markovian jumping neutral-type neural networks with mixed delays[J]. {\em Neural Networks}, 2017, 86:32–41.
+
+\bibitem{eventunknown}
+H. Li, Z. Zuo, Y. Wang.
+Event triggered control for Markovian jump systems with partially unknown transition probabilities and actuator saturation[J]
+{\em Journal of the Franklin Institute}, 2016, 353(8):1848–1861.
+\end{thebibliography}
+}
+
+\section{主要内容}
+
+\frame{\linespread{1.3} \frametitle{\secname}\transsplithorizontalin\small\song\rm
+  $\blacksquare$ 第3章~分散式事件激发采样下带马氏切换的非线性随机耦合网络同\\
+    ~~~~步问题\\
+  $\blacksquare$ 第4章~集中式事件激发采样下带部分未知转移率和时滞的复杂网络\\
+    ~~~~同步问题\\
+  $\blacksquare$ 第5章~基于事件激发采样带部分未知转移率和布朗运动的复杂网络\\
+    ~~~~同步问题
+}
+
+\subsection{\chapthree}
+\frame{\linespread{1.3} \frametitle{\secname}\transsplithorizontalin\small\song\rm
+  $\blacksquare$ 第3章~分散式事件激发采样下带马氏切换的非线性随机耦合网络同\\
+    ~~~~步问题\\
+  \textcolor[rgb]{0.5,0.5,0.5}{$\blacksquare$ 第4章~集中式事件激发采样下带部分未知转移率和时滞的复杂网络\\
+    ~~~~同步问题}\\
+  \textcolor[rgb]{0.5,0.5,0.5}{$\blacksquare$ 第5章~基于事件激发采样带部分未知转移率和布朗运动的复杂网络\\
+    ~~~~同步问题}
+}
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+网络数学模型：
+    \begin{align*}
+    \dot{x}_{i}(t)&=f(x_{i}(t))-\theta(t)\rho(t)\sum^N_{j=1}l_{ij}(r_{t})\Gamma[h(x_{j}(t_{k}^{i}))-h(x_{i}(t_{k}^{i}))]+u_i(t), \\
+    &\quad t_{k}^i\leq t< t_{k+1}^i, i = 1,\cdots,N,\tag{3.1}\label{sys:init1}
+    \end{align*}
+    其中, $x_i(t)=(x_{i}^{1}(t),x_{i}^{2}(t),\cdots,x_{i}^{n}(t))^{\top}\in R^{n}$是节点$i$的状态向量; $\theta(t)$, $\rho(t)$是随机变量, $f: R^n\rightarrow R^n$ 是节点自身动力学；$h: R^n\rightarrow R^n$ 是非线性耦合连续函数; $t_k^i$是第$i$个节点第$k$次事件激发的时刻; $u_i(t)$ 是控制输入, 定义如下:
+    \begin{align*}
+    u_i(t)=-\tau \rho(t)d_{i}(r_{t})\Gamma[h(x_{i}(t_{k}^{i}))-h(s(t_{k}^{i}))]
+    \end{align*}
+    这里$s(t)$满足$\dot{s}(t)=f(s(t))$.
+
+    \footnote{
+    \begin{thebibliography}{1}
+    \tiny
+    \bibitem{eventsyn7} W. Lu, Y. Han, T. Chen. Pinning networks of coupled dynamical systems with Markovian switching couplings and event-triggered diffusions[J]. {\em Journal of the Franklin Institute}, 2015, 352(9):3526-3545.
+    \end{thebibliography}
+    }
+}
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+
+    相关定义和假设\\
+
+        \textbf{定义2.1.} 如果一个网络系统对于任何的初始值$x_i(0), i=1,2,\cdots,N$, 以及任意两个节点$x_i(t),x_j(t)$满足
+            $$ \lim_{t\rightarrow\infty}\mathrm{E}\|x_i(t)-x_j(t)\|=0, ~~i,j=1,\cdots N,$$
+        则称该网络系统在均方意义下能够达到同步, 简称\textbf{均方同步};
+        如果存在两个正数$\delta$和$M$, 使得
+        $$\mathrm{E}\|x_i(t)-x_j(t)\|^2\leq Me^{-\delta t}, ~~i,j=1,\cdots N.$$
+        则称该网络系统在均方意义下能够达到指数同步, 简称\textbf{均方指数同步}.
+
+        \textbf{定义2.5.} 称函数$f(\cdot): R^n\mapsto R^n$满足$QUAD$条件, 记作 $f\in QUAD(G,\Delta,\xi)$, 如果存在两个正定对角阵$G=\text{diag}\{g_1,g_2,\cdots,g_n\}$, $\Delta=\text{diag}\{\delta_1,\delta_2,\cdots,\delta_n\}$和一个正数$\xi$, 使得对任意$x,y\in R^n$, 有
+        $$(x-y)^\top G[f(x)-f(y)-\Delta(x-y)]\leq-\xi(x-y)^\top G(x-y).$$
+}
+
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+
+        \textbf{定义2.6.} 称函数$f(\cdot): R^n\mapsto R^n$属于函数类$L(l_{1},l_2)$, 记作$f(\cdot)\in L(l_{1},l_2)$, 如果存在两个正数$l_{1}$和$l_2$, 使得对任意$x,y\in R^n$, 有
+        \begin{align*}
+            \| f(x)-f(y)\|\leq l_{1}\| x-y\|,\\
+            \| f(x)+f(y)\|\leq l_{2}\| x+y\|.
+        \end{align*}
+        称函数$g(\cdot): R^n\mapsto R^n$属于函数类$C(\sigma)$, 记作$g(\cdot)\in C(\sigma)$, 如果存在非零常数$\sigma$, 使得对任意$x,y\in R^n$, 有
+        \begin{align*}
+            (x-y)^\top(g(x)-g(y))\geq \sigma(x-y)^\top(x-y).
+        \end{align*}
+
+        \textbf{假设3.1.} 假设存在正数$\alpha_{k}$, $\beta_{k}(k=1,2,\cdots,n)$, 使得对任意$x,y\in R$, 有
+                $$\alpha_{k}\leq\frac{h_{k}(x)-h_{k}(y)}{x-y}\leq\beta_{k}.$$
+}
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+    连续监控激发规则:
+
+    \begin{center}
+    \scalebox{0.65}
+    {\includegraphics[totalheight=10cm]{flowchartcon1.png}
+    }\\
+    \small 图3.1\,\, 连续监控下事件激发牵制控制流程图.
+    \end{center}
+}
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+连续监控下事件激发规则
+\begin{itemize}
+    \item 情形a: 基于同步误差上界的连续监控事件激发规则(简称为CRS激发规则):
+            \begin{align*}
+            t^{i}_{k+1}=\max\left\{t\geq t^{i}_{k}: \|\tilde{e}_{i}(t)\| \leq\omega \| e_{i}(t)\|\right\}
+            \end{align*}
+    \item 情形b: 基于指数函数上界的连续监控事件激发规则(简称为CRE激发规则):
+            \begin{align*}
+             t^{i}_{k+1}=\max\left\{t\geq t^{i}_{k}: \|\tilde{e}_{i}(t)\| \leq ae^{-bt}\right\}
+             \end{align*}
+\end{itemize}
+    这里$e_{i}(t)=x_{i}(t)-s(t)(i=1,2,\cdots,N)$
+    \begin{align*}
+        \nonumber \tilde{e}_{i}(t)=&\theta(t)\sum^{N}_{j=1}l_{ij}(r_{t})\Gamma[h(x_{j}(t))-h(x_{j}(t_{k}^{i}))]\\
+        &-\tau d_{i}(r_{t})[h(x_{i}(t))-h(x_{i}(t_{k}^{i}))+h(s(t_{k}^{i}))-h(s(t))].
+        \end{align*}
+}
+
+%\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+% \begin{center}
+%    \scalebox{0.65}
+%    {\includegraphics[totalheight=6cm]{flowchartcon1.png}
+%    }
+%    \end{center}
+%    \vspace{-1cm}
+%\textbf{算法3.1} (连续监控事件激发算法).\label{algo1}~~\\
+%        \ks
+%         \inden $1)$ 当$k=0$时, 初始化$t^i_k=0$;
+%
+%         \inden $2)$ 当$t\geq t^i_k$时, 监控器实时收集节点$x_i(t),x_j(t)$, $s(t)$的状态信息;
+%
+%         \inden $3)$ 如果$\|\tilde{e}_{i}(t)\|>\omega \| e_{i}(t)\|($或者 $\|\tilde{e}_{i}(t)\| > ae^{-bt})$, 则事件被激发, 最新的激发时刻$t^i_{k+1}=t$, 返回$2)$;
+%
+%         \inden $4)$ 当$t=t^i_{k+1}$时, 节点$i$以及它的邻居节点和控制器将会更新状态信息, 即用$t_{k+1}^i$时刻状态信息替换$t^i_{k}$时刻的状态信息, 返回$2)$.
+%}
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+
+            \textbf{定理3.1.} \ks 如果假设 3.1 成立, $f(\cdot)$属于$QUAD(G,\Delta,\xi)$, 并且存在正定对角阵$P(u)=\mathrm{diag}\{p_{1}(u),\cdots p_{N}(u)\}$, $u\in S$, 使得对任意$u\in S$, 有
+            \begin{align*}
+            \bar{\delta}P(u)\otimes G-c\theta\underline{\alpha} P(u)L(u)\otimes G\Gamma
+            -c\tau\underline{\alpha} P(u)D(u)\otimes G\Gamma+\frac{1}{2}\sum_{v=1}^{m}q_{uv}P(v)\otimes G\leq 0
+            \end{align*}
+            其中$\bar{\delta}=\max_{k}\{\delta_k \}$, $\underline{\alpha}=\min_{k}\{\alpha_{k}\}$.
+            那么, 基于$\mathrm{CRS}$激发规则或者$\mathrm{CRE}$激发规则, 按照算法 3.1, 网络系统 \eqref{sys:init1} 可以实现均方指数同步.\\
+            ~\\
+            ~\\
+        \song
+        \inden 证明定理时设定随机Lyapunov—Krasovskii函数$V(t)$如下:
+        \begin{equation*}
+            V(t)=\frac{1}{2}e^{\top}(t)[P(u)\otimes G]e(t).
+        \end{equation*}
+}
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+\begin{itemize}
+    \item 情形a: 基于同步误差上界的连续监控事件激发规则(简称为CRS激发规则):
+            \begin{align*}
+            t^{i}_{k+1}=\max\left\{t\geq t^{i}_{k}: \|\tilde{e}_{i}(t)\| \leq\omega \| e_{i}(t)\|\right\}
+            \end{align*}
+    \item 情形b: 基于指数函数上界的连续监控事件激发规则(简称为CRE激发规则):
+            \begin{align*}
+             t^{i}_{k+1}=\max\left\{t\geq t^{i}_{k}: \|\tilde{e}_{i}(t)\| \leq ae^{-bt}\right\}
+             \end{align*}
+\end{itemize}
+\textbf{注3.3.} CRS激发规则中的系统测量误差被同步误差控制, 其系数$\omega$是由系统决定的, 不可以被修改. 而CSE激发规则中的系统测量误差被指数函数控制, 激发规则中的参数 $a$ 和$b$可以根据所需的同步速度和激发频率进行选择. 一般上, CRS激发规则的同步速度会比CRE激发规则快, 但是CRS激发规则的激发频率会高于CRE激发规则. 高激发频率会引起系统间的数据频繁更新, 因此CRS激发规则比CRE激发规则有更大的计算负荷. 至于监控成本方面, 两种激发规则花费的成本是一样的.
+}
+
+
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+    离散监控激发规则:
+
+    \begin{center}
+    \scalebox{0.65}
+    {\includegraphics[totalheight=10cm]{flowchartdec2.png}
+    }\\
+    \small 图3.1\,\, 离散监控下事件激发牵制控制流程图.
+    \end{center}
+}
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+离散监控下事件激发规则
+\begin{itemize}
+    \item 情形c: 基于同步误差上界的离散监控激发规则(DRS激发规则):
+        \begin{align*}
+            \nonumber \pi^{i}_{k}=&\max\Big\{t:
+            \sum^N_{j=1,j\neq i}(-l_{ij}(r_{t+t^i_k}))\varphi(t,\xi^i_k,\zeta^j_{k_j(t+t^i_k)},x_i(t^i_k),x_j(t^i_k))\\
+             &\quad+\tau d_i(r_{t+t^i_k})\varphi(t,\xi^i_k,0,x_i(t^i_k),s(t^i_k))
+            \leq\omega \psi(t,\xi^i_k,0,x_i(t^i_k),s(t^i_k))\Big\}\\
+           \nonumber t_{k+1}^i&=t_{k}^i+\pi^{i}_{k}
+            \end{align*}
+     \item 情形d: 基于指数函数上界的离散监控激发规则(DRE激发规则):
+        \begin{align*}
+             \nonumber \pi^{i}_{k}=&\max\Big\{t:
+            \sum^N_{j=1,j\neq i}(-l_{ij}(r_{t+t^i_k}))\mathrm{E}\varphi(t,\xi^i_k,\zeta^j_{k_j(t+t^i_k)},x_i(t^i_k),x_j(t^i_k))\\
+            &\quad+\tau d_i(r_{t+t^i_k})\mathrm{E}\varphi(t,\xi^i_k,0,x_i(t^i_k),s(t^i_k))
+            \leq ae^{-b(t+t^i_k)}\Big\}\\
+            \nonumber t_{k+1}^i&=t_{k}^i+\pi^{i}_{k}
+            \end{align*}
+\end{itemize}
+}
+
+%\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+%\textbf{算法3.2} (离散监控事件激发算法).\label{algo1}~~\\
+%        \ks
+%         \inden $1)$ 当$k=0$时, 初始化$t^i_k=0$;
+%
+%          \inden   $2)$ 当$t=t^i_k$时, 控制器收集节点状态信息$x_i(t_k^i), x_j(t^j_{k_j(t_k^i)})$以及$s(t_k^i)$;
+%
+%          \inden   $3)$ 预测机制预测下一次事件激发间隔$\pi_k^i$;
+%
+%          \inden   $4)$ 当$t_k^i<t<t^i_k+\pi^i_k$时, 如果存在某个邻居节点$j$的事件被激发, 则$t^j_{k_j+1}=t$, 返回$3)$;
+%
+%          \inden   $5)$ 如果$r_t$的状态发生转移, 则返回$2)$;
+%
+%          \inden   $6)$ 当$t=t^i_k+\pi^i_k$时, 则节点$i$的事件被激发, 新的事件激发时刻$t_{k+1}^i=t$. 此时节点$i$ 以及它的邻居节点和控制器将会更新, 即利用$t^i_{k+1}$时的状态信息替换$t^i_k$时的状态信息, 返回$2)$.
+%}
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+
+            \textbf{定理3.2.} \ks 如果假设 3.1 成立, $f(\cdot)\in L(l_{1},l_{2})$以及$f(\cdot)\in C(\sigma)$, 并且存在正定对角阵$P(u)=\mathrm{diag}\{p_1(u),\cdots,p_N(u)\}$, $u\in S$, 使得对任意$u\in S$, 有
+            \begin{align*}
+            \bar{\delta}P(u)\otimes G-c\theta\underline{\alpha} P(u)L(u)\otimes G\Gamma
+            -c\tau\underline{\alpha} P(u)D(u)\otimes G\Gamma+\frac{1}{2}\sum_{v=1}^{m}q_{uv}P(v)\otimes G\leq 0
+            \end{align*}
+            其中$\bar{\delta}=\max_{k}\{\delta_k \}$, $\underline{\alpha}=\min_{k}\{\alpha_{k}\}$,
+            那么, 基于$\mathrm{DRS}$激发规则或者$\mathrm{DRE}$激发规则, 按照算法 3.2, 网络系统 \eqref{sys:init1} 可以实现均方指数同步.\\
+            ~\\
+            ~\\
+        \song
+        \inden 该定理的条件与定理 3.1 的条件是一样的, 唯一不同的是事件激发规则. 因此主要证明思路是考察在离散监控事件激发规则成立的条件下连续监控事件激发规则是否也成立. 这只要判断$\|\tilde{e}_i(t)\|$ 的上界函数和$\|e_i(t)\|$的下界函数是否是$\varphi$和$\psi$即可.
+}
+
+
+
+
+
+
+
+\frame{\linespread{1.3} \frametitle{\small \chapthree}\transsplithorizontalin\small\song\rm
+四种激发规则的特征比较
+   \begin{table}[!hbp]
+    \setlength{\abovecaptionskip}{-1pt}
+    \setlength{\belowcaptionskip}{-1pt}
+    \begin{center}
+    \begin{tabular}{|c|c|}
+    \hline
+    ~~~同步速度~~~ & ~~~CRS$>$DRS, CRE$>$DRE~~~\\
+    \hline
+    ~~~监控成本~~~ & ~~~CRS$=$CRE$>$DRS$>$DRE~~~\\
+    \hline
+    ~~~计算负荷~~~ & ~~~DRS$>$DRE$>$CRS$>$CRE~~~\\
+    \hline
+    ~~~激发次数~~~ & ~~~DRS$>$DRE$>$CRS$>$CRE~~~\\
+    \hline
+    \end{tabular}
+    \end{center}
+    \end{table}
+    ~\\
+    \textbf{注3.7.} 连续监控激发规则和离散监控激发规则最大的区别在于收集节点状态信息时刻的不同, 在连续监控情形中, 监控器需要不停地监控网络所有节点状态并收集记录其状态信息, 激发规则需要根据收集到数据进行实时更新, 即激发规则每时每刻都需要计算和判断条件是否满足. 而在离散监控激发规则中, 监控器只在事件激发时刻监控节点状态, 当某个节点的事件激发时, 监控器把该节点状态信息传递给预测机制, 预测机制根据收集得到的信息进行预测下一次激发时刻, 即激发规则是需要在激发时刻对数据进行更新.
+
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapthree}\transsplithorizontalin\small\song\rm
+数值模拟
+\vspace{-1cm}
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{NewL1.pdf}\quad
+\includegraphics[totalheight=6cm]{NewL2.pdf}
+}
+\end{center}
+\vspace{-1cm}
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{NewL3.pdf}\quad
+\includegraphics[totalheight=6cm]{randomvariabel-eps-converted-to.pdf}
+}
+\end{center}
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapthree}\transsplithorizontalin\small\song\rm
+
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{state2223.jpg}\quad
+\includegraphics[totalheight=6cm]{state1612.jpg}
+}
+\end{center}
+\vspace{-0.5cm}
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{dstateoneand2212.jpg}\quad
+\includegraphics[totalheight=6cm]{dstatedata3840.jpg}
+}
+\end{center}
+}
+
+
+\frame{\linespread{1.3} \frametitle{\small\chapthree}\transsplithorizontalin\small\song\rm
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{Totallerror1.pdf}\quad
+\includegraphics[totalheight=6cm]{Totallerror2.pdf}
+}
+\end{center}
+\vspace{-0.5cm}
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{triggertime.pdf}\quad
+\includegraphics[totalheight=6cm]{Vt.pdf}
+}
+\end{center}
+}
+
+
+\subsection{\chapfour}
+\frame{\linespread{1.3} \frametitle{\secname}\transsplithorizontalin\small\song\rm
+  \textcolor[rgb]{0.5,0.5,0.5}{$\blacksquare$ 第3章~分散式事件激发采样下带马氏切换的非线性随机耦合网络同\\
+    ~~~~步问题}\\
+  $\blacksquare$ 第4章~集中式事件激发采样下带部分未知转移率和时滞的复杂网络\\
+    ~~~~同步问题\\
+  \textcolor[rgb]{0.5,0.5,0.5}{$\blacksquare$ 第5章~基于事件激发采样带部分未知转移率和布朗运动的复杂网络\\
+    ~~~~同步问题}
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfour}\transsplithorizontalin\small\song\rm
+网络数学模型：
+        \begin{align*}
+           \dot{x}_{i}(t)&=f(t,x_{i}(t),x_i(t-\tau))-c\sum^N_{j=1}l_{ij}(r_{t})\Gamma[x_{j}(t_k)-x_{i}(t_{k})]+u_i(t)\\
+            &\quad\quad t_{k}\leq t< t_{k+1}, \quad i = 1,\cdots,N      \tag{4.1}\label{sys:cen}
+        \end{align*}
+        $u_i(t)$是控制输入, 定义如下:
+        \begin{align*}
+            u_i(t)=-\rho c\beta_{i}(t)\frac{1}{N}\sum_{j=1}^N\Gamma[x_{i}(t_{k})-x_j(t_{k})]
+        \end{align*}
+        ~\\
+        \textbf{假设4.1.} 对于节点自身动力学$f(\cdot,\cdot,\cdot)$, 假设存在两个常数$\alpha_1$和$\alpha_2$, 使得对任意的$x(t), y(t)\in R^n$, 有
+         \begin{align*}
+        &\|f(t,x(t),x(t-\tau))-f(t,y(t),y(t-\tau))\|\\
+        \leq&\alpha_1\|x(t)-y(t)\|+\alpha_2\|x(t-\tau)-y(t-\tau)\|.
+        \end{align*}
+}
+\frame{\linespread{1.3} \frametitle{\small\chapfour}\transsplithorizontalin\small\song\rm
+集中式激发规则\\
+~\\
+~\\
+    \inden 定义事件激发函数如下:
+        \begin{align*}
+            g(t)=\|\hat{{\delta}}(t)\|-\varpi\|\hat{x}(t)\|     \tag{4.6}\label{trirule}
+        \end{align*}
+        其中$\hat{x}(t)=(L_{u}\otimes I_n)x(t)$, $\hat{{\delta}}(t)=(L_{u}\otimes I_n){\delta}(t)$, $\hat{e}(t)=(L_u\otimes I_n)e(t)$, $\varpi$是正数.
+
+        \inden 当事件激发函数达到阈值$0$时, 系统就会被激发, 激发时刻随即被确定, 即:
+        \begin{align*}
+            t_{k+1}=\max\{t\ge t_k: g(t)\le 0\}.
+        \end{align*}
+        ~~\\
+}
+\frame{\linespread{1.3} \frametitle{\small\chapfour}\transsplithorizontalin\small\song\rm
+\textbf{定理4.1.} \ks 如果假设 4.1 成立, 并且存在常数$a,a_1,a_2,\cdots,a_m$, 使得对任意$u\in S$, 有:
+            \begin{align*}
+            \left\{
+            \begin{aligned}
+            &\pi+a+\pi_u-c\gamma(\lambda_2+\rho\beta)\leq0,\\
+            &2a\lambda_2^2-\bar{\lambda}\alpha_2>0,\\
+            &L^2_v-a_uI_N\leq 0, \quad\quad \text{if} \quad v\neq u, v\in S_2^u, \\
+            &L^2_v-a_uI_N\geq 0, \quad\quad \text{if} \quad v= u, v\in S_2^u,
+            \end{aligned}
+            \right.
+            \end{align*}
+        其中$\pi=\bar{\lambda}(\frac{\alpha_1}{\lambda_2}+\alpha_2)$, $\pi_u=\frac{1}{2}\sum_{v\in S_1^u\setminus\{u\}}q_{uv}(\frac{\bar{\lambda}^2_{v}}{\lambda_2^2}-\frac{a_u}{\bar{\lambda}^2})
+        +\frac{1}{2}q_{uu}I(u)(1-\frac{a_u}{\lambda_2^2})$, 如果$u\in S_1^u$, 则$I(u)=1$, 否则$I(u)=0$.
+        那么, 在事件激发函数$(\ref{trirule})$下, 取$\varpi=\frac{c\gamma(\lambda_2+\rho\beta)-\pi-a-\max_{u\in S}\{\pi_u\}}{c\bar\gamma(\bar\lambda+\rho\beta)}$, 网络系统$(\ref{sys:cen})$对任意初值都可以实现均方指数同步.
+}
+\frame{\linespread{1.3} \frametitle{\small\chapfour}\transsplithorizontalin\small\song\rm
+
+\inden 若马尔可夫链的转移率全部已知, 那么定理 4.1 的条件可以被弱化.
+
+        \textbf{推论4.1.} \ks
+        如果假设 4.1 成立, 并且存在常数$a>\frac{\bar{\lambda}\alpha_2}{2\lambda_2^2}$, 使得对所有$u\in S$, 有
+            \begin{align*}
+            &\pi+a+\pi_u-c\gamma(\lambda_2+\rho\beta)\leq0,
+            \end{align*}
+        其中$\pi=\bar{\lambda}(\frac{\alpha_1}{\lambda_2}+\alpha_2)$, $\pi_u=\frac{1}{2}\sum_{v\neq u}q_{uv}(\frac{\bar{\lambda}^2_{v}}{\lambda_2^2}-1)$.
+        那么, 在事件激发函数 \eqref{trirule} 下, 取$\varpi=\frac{c\gamma(\lambda_2+\rho\beta)-\pi-a-\max_{u\in S}\{\pi_u\}}{c\bar\gamma(\bar\lambda+\rho\beta)}$, 网络系统 \eqref{sys:cen} 对于任意初值可以实现均方指数同步.
+~\\
+~\\
+~\\
+~\\
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfour}\transsplithorizontalin\small\song\rm
+若网络节点自身动力学不包含时滞, 并且马尔可夫链的转移率全部已知, 那么网络系统 \eqref{sys:cen} 可转化为:
+        \begin{align*}
+          \dot{x}_{i}(t)=f(t,x_{i}(t))-c\sum^N_{j=1}l_{ij}(r_{t})\Gamma[x_{j}(t_k)
+            -x_{i}(t_{k})]+u_i(t)       \tag{4.16}\label{cortwo}
+        \end{align*}
+        同时, 假设4.1 变成常见的Lipschitz条件. 即, 假设存在常数$\alpha_1$使得对任意$x(t), y(t)\in  R^n$, 有
+        \begin{align*}
+        \|f(t,x(t))-f(t,y(t))\|\leq\alpha_1\|x(t)-y(t)\|        \tag{4.17}\label{asss3}
+        \end{align*}
+        \textbf{推论4.2.} \ks
+        如果$f(\cdot,\cdot)$满足条件 \eqref{asss3} 并且存在正数$a$, 使得对所有$u\in S$, 有
+        \begin{align*}
+            \pi+a+\pi_u-c\gamma(\lambda_2+\rho\beta)\leq0,
+        \end{align*}
+        其中$\pi=\frac{\bar{\lambda}\alpha_1}{\lambda_2}$, $\pi_u=\frac{1}{2}\sum_{v\neq u}q_{uv}(\frac{\bar{\lambda}^2_{v}}{\lambda_2^2}-1)$.
+        那么, 在激发函数 \eqref{trirule} 下, 取$\varpi=\frac{c\gamma(\lambda_2+\rho\beta)-\pi-a-\max_{u\in S}\{\pi_u\}}{c\bar\gamma(\bar\lambda+\rho\beta)}$, 网络系统 \eqref{cortwo} 对于任意初值可以实现均方指数同步.
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfour}\transsplithorizontalin\small\song\rm
+若复杂网络耦合结构不受马氏链调制, 那么网络系统数学模型 \eqref{sys:cen} 改成下式:
+        \begin{align*}
+        \dot{x}_{i}(t)&=f(t,x_{i}(t),x_i(t-\tau))-c\sum^N_{j=1}l_{ij}\Gamma[x_{j}(t_k)-x_{i}(t_{k})]+u_i(t),\\
+           &\quad t_{k}\leq t< t_{k+1} \quad i = 1,\cdots,N.        \tag{4.19}\label{sysnomarkov}
+        \end{align*}
+         \textbf{推论4.3.} \ks
+        如果假设 4.1 成立并且存在一个正数$a>\frac{\bar{\lambda}\alpha_2}{2\lambda_2^2}$, 使得:
+           \begin{align*}
+            \pi+a-c\gamma(\lambda_2+\rho\beta)\leq0,
+            \end{align*}
+        其中$\pi=\bar{\lambda}(\frac{\alpha_1}{\lambda_2}+\alpha_2)$.
+        那么, 在事件激发函数 \eqref{trirule} 下, 取$\varpi=\frac{c\gamma(\lambda_2+\rho\beta)-\pi-a}{c\bar\gamma(\bar\lambda+\rho\beta)}$, 网络
+        系统 \eqref{sysnomarkov} 对于任意初值可以实现均方指数同步.
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfour}\transsplithorizontalin\small\song\rm
+事件激发时刻间隔的下界\\
+~\\
+        \textbf{定理4.2.} \ks
+        如果假设 4.1 成立, 并且存在常数$a,a_1,a_2,\cdots,a_m$, 使得对所有$u\in S$, 有
+            \begin{align*}
+            \left\{
+            \begin{aligned}
+            &\pi+a+\pi_u-c\gamma(\lambda_2+\rho\beta)\leq0,\\
+            &2a\lambda_2^2-\bar{\lambda}\alpha_2>0,\\
+            &L^2_v-a_uI_N\leq 0, \quad\quad \text{if} \quad v\neq u, v\in S_2^u, \\
+            &L^2_v-a_uI_N\geq 0, \quad\quad \text{if} \quad v= u, v\in S_2^u,
+            \end{aligned}
+            \right.
+            \end{align*}
+        其中$\pi=\bar{\lambda}(\frac{\alpha_1}{\lambda_2}+\alpha_2)$, $\pi_u=\frac{1}{2}\sum_{v\in S_1^u\setminus\{u\}}q_{uv}(\frac{\bar{\lambda}^2_{v}}{\lambda_2^2}-\frac{a_u}{\bar{\lambda}^2})
+        +\frac{1}{2}q_{uu}I(u)(1-\frac{a_u}{\lambda_2^2})$,如果$u\in S_1^u$, 则$I(u)=1$, 否则$I(u)=0$.
+        那么, 在事件激函数$(\ref{trirule})$下, 取$\varpi=\frac{c\gamma(\lambda_2+\rho\beta)-\pi-a-\max_{u\in S}\{\pi_u\}}{c\bar\gamma(\bar\lambda+\rho\beta)}$, 对任意初值, 任意两个事件激发时刻间隔存在正的下界.
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfour}\transsplithorizontalin\small\song\rm
+    任意两个事件激发$t_k$, $t_{k+1}$的时刻间隔的正下界$\tau^*$ 满足$\phi(\tau^*,0)=\varpi$, \\
+    其中
+    \begin{align*}
+        \phi(t)=\frac{k_2\exp\big\{k_2t+\ln\frac{k_1\phi_0+k_1}{k_1\phi_0+k_1+k_2}\big\}}{k_1-k_1\exp\big\{k_2t+\ln\frac{k_1\phi_0+k_1}{k_1\phi_0+k_1+k_2}\big\}}-1,
+    \end{align*}
+    通过求解该方程可得:
+        $$\tau^*=\frac{1}{k_2}\ln\frac{(k_1+k_2)(1+\varpi)}{k_2+k_1(1+\varpi)}.$$
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfour}\transsplithorizontalin\small\song\rm
+数值模拟
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=5.5cm]{figure1.pdf}\quad
+\includegraphics[totalheight=5.5cm]{figure2.pdf}
+}
+\end{center}
+\vspace{-0.5cm}
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=5.5cm]{xi-xj.pdf}\quad
+\includegraphics[totalheight=5.5cm]{figure4.pdf}
+}
+\end{center}
+
+}
+
+
+\subsection{\chapfive}
+\frame{\linespread{1.3} \frametitle{\secname}\transsplithorizontalin\small\song\rm
+  \textcolor[rgb]{0.5,0.5,0.5}{$\blacksquare$ 第3章~分散式事件激发采样下带马氏切换的非线性随机耦合网络同\\
+    ~~~~步问题}\\
+  \textcolor[rgb]{0.5,0.5,0.5}{$\blacksquare$ 第4章~集中式事件激发采样下带部分未知转移率和时滞的复杂网络\\
+    ~~~~同步问题}\\
+  $\blacksquare$ 第5章~基于事件激发采样带部分未知转移率和布朗运动的复杂网络\\
+    ~~~~同步问题
+}
+\frame{\linespread{1.3} \frametitle{\small\chapfive}\transsplithorizontalin\small\song\rm
+集中式事件激发采样带布朗运动的网络模型
+        \begin{align*}
+         \dot{x}_{i}(t)=&f(x_{i}(t))-\rho(t)\sum^N_{j=1}l_{ij}(r_t)\Gamma[x_{j}(t_{k})-x_{i}(t_{k})\\
+            &+(\varepsilon_{ij}(t)\otimes\mathbf{1}_n)\xi_{ij}(t)]+u_i(t)       \tag{5.2}\label{sys:gensys}
+        \end{align*}
+      其中$\varepsilon_{ij}(t)\geq 0$是噪声强度, $t_{k}$是第$k$次激发时刻, $\xi_{ij}(t)$是标准白噪声过程.
+      控制输入$u_i(t)=-\epsilon\rho(t)d_{i}(r_{t})\Gamma[x_{i}(t_{k})-s(t_{k})]$, $s(t)$满足$\dot{s}(t)=f(s(t))$.
+      \\
+      ~\\
+      微分形式：
+      \begin{align*}
+      dx_{i}(t)=&\Big[f(x_{i}(t))-\rho(t)\sum^N_{j=1}l_{ij}(r_t)\Gamma(x_{j}(t_{k})-x_{i}(t_{k}))+u_i(t)\Big]dt\\
+      &-\rho(t)\sum^N_{j=1}l_{ij}(r_t)\Gamma(\varepsilon_{ij}(t)\otimes\mathbf{1}_n)dw_{ij}(t), \quad i = 1,\cdots,N,   \tag{5.3}\label{sys-dt}
+      \end{align*}
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfive}\transsplithorizontalin\small\song\rm
+        \begin{align*}
+        dx_{i}(t)&=\Big[f(x_{i}(t))-\rho(t)\sum^N_{j=1}l_{ij}(r_{t})\Gamma(x_{j}(t_k)-x_{i}(t_{k}))
+        +u_i(t)\Big]dt-\rho(t)R_i(t)dw_{i}(t),\\
+         &\quad t_{k}\leq t< t_{k+1}, \quad i = 1,\cdots,N,     \tag{5.4}\label{sys_cen}
+        \end{align*}
+        其中$R_i(t)=(l_{i1}(r_t)\varepsilon_{i1}(t),\cdots,l_{iN}(r_t)\varepsilon_{iN}(t))$, $w_{i}(t)=(w_{i1}(t),\cdots,w_{iN}(t))^\top$
+        ~\\
+        ~\\
+
+        定义集中式事件激发函数$g^c(t)$如下:
+        \begin{align*}\tag{5.7}\label{trig-f}
+            g^c(t)=(1+\epsilon)\|\delta(t)\|^2+\epsilon\|\hat{s}(t)\|^2-\frac{\xi^2\underline{q}^2}{4(\bar{\lambda}^2+2\epsilon)c^2\bar{q}^2\bar{\gamma}^2}\|e(t)\|^2
+        \end{align*}
+      这里$\hat{s}(t)=\mathbf{1}_N\otimes\tilde{s}(t)$, $\tilde{s}(t)=s(t)-s(t_k)$.
+
+
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfive}\transsplithorizontalin\small\song\rm
+        \textbf{定理5.1.} \ks
+        如果$f(\cdot)$属于$QUAD(G,\Delta,\xi)$, 噪声强度$\varepsilon_{ij}(t)$满足$\int_0^\infty\varepsilon_{ij}^2(s)ds<\infty$, 并且存在正数$\pi_1,\pi_2,\cdots,\pi_m$, $a_1,a_2,\cdots,a_m$使得对所有$u\in S$, 下式不等式成立:
+            \begin{align*}\tag{5.8}\label{ce-condiction}
+            \left\{
+            \begin{aligned}
+                  &(\bar{\delta}+\chi_u)I_N-c\underline{\gamma}(L(u)+\epsilon D(u))\leq0,\\
+                  &\pi_v-a_u\leq0, \quad \text{if}\quad v\neq u, v\in S^u_2,\\
+                  &\pi_v-a_u\geq0, \quad \text{if} \quad v= u, v\in S^u_2,
+            \end{aligned}
+            \right.
+            \end{align*}
+           其中$\bar{\delta}=\max_{k=1}^k\{\delta_k\}$, $\underline{\gamma}=\min_{k=1}^k\{\gamma_k\}$, $\chi_u=\sum_{v\in S_1^u}q_{uv}(\pi_v-a_u)/\pi_u$, 那么在事件激发函数 \eqref{trig-f} 下, 网络系统 \eqref{sys_cen} 可以实现均方指数同步.
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfive}\transsplithorizontalin\small\song\rm
+分散式事件激发采样带布朗运动的网络模型\\
+        \begin{align*}
+         dx_{i}(t)=&\Big[f(x_{i}(t))-\rho(t)\sum^N_{j=1}l_{ij}(r_{t})\Gamma(x_{j}(t^j_{k'})-x_{i}(t^i_{k}))+u_i(t)\Big]dt\\
+         &-\rho(t)R_i(t)dw_{i}(t),\quad t^i_{k}\leq t< t^i_{k+1}, \quad i = 1,\cdots,N      \tag{5.19}\label{sys_decen}
+        \end{align*}
+       其中$\{t^i_{1},t^i_{2},\cdots \}$是严格递增的序列, 它表示节点$i$的事件激发时刻; $k'=\arg\max_k\{t^j_k\leq t\}$; 控制输入$u_i(t)$定义如下:
+        \begin{align*}
+            u_i(t)=-\epsilon\rho(t)d_{i}(r_{t})\Gamma[x_{i}(t^i_{k})-s(t^i_{k})].
+        \end{align*}
+       分散式激发函数$g^i(t)$定义为如下:
+        \begin{align*}\tag{5.21}\label{detrig-f}
+            g^i(t)=(1+\epsilon)\|\delta_i(t)\|^2+\epsilon\|\hat{s}_i(t)\|^2-\frac{\xi^2\underline{q}^2}{4(\bar{\lambda}^2+2\epsilon)c^2\bar{q}^2\bar{\gamma}^2}\|e_i(t)\|^2
+        \end{align*}
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfive}\transsplithorizontalin\small\song\rm
+\textbf{定理5.2.} \ks
+如果$f(\cdot)$属于$QUAD(G,\Delta,\xi)$, 噪声强度$\varepsilon_{ij}(t)$满足$\int_0^\infty\varepsilon_{ij}^2(s)ds<\infty$, 并且存在正数$\pi_1,\pi_2,\cdots,\pi_m$, $a_1,a_2,\cdots,a_m$使得对所有$u\in S$, 下式不等式成立:
+            \begin{align*}\tag{5.22}\label{de-condiction}
+            \left\{
+            \begin{aligned}
+                  &(\bar{\delta}+\chi_u)I_N-c\underline{\gamma}(L(u)+\epsilon D(u))\leq0,\\
+                  &\pi_v-a_u\leq0, \quad \text{if},\quad v\neq u, v\in S^u_2,\\
+                  &\pi_v-a_u\geq0, \quad \text{if}, \quad v= u, v\in S^u_2,
+            \end{aligned}
+            \right.
+            \end{align*}
+        其中$\chi_u=\sum_{v\in S_1^u}q_{uv}(\pi_v-a_u)/\pi_u$, 则在事件激发函数 \eqref{detrig-f} 下, 网络系统 \eqref{sys_decen} 均方同步到$s(t)$.
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfive}\transsplithorizontalin\small\song\rm
+数值模拟
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=5.5cm]{cestate.pdf}\quad
+\includegraphics[totalheight=5.5cm]{ceEt.pdf}
+}
+\end{center}
+\vspace{-0.5cm}
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=5.5cm]{destate.pdf}\quad
+\includegraphics[totalheight=5.5cm]{deEt.pdf}
+}
+\end{center}
+}
+
+\frame{\linespread{1.3} \frametitle{\small\chapfive}\transsplithorizontalin\small\song\rm
+\vspace{-0.8cm}
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{gct.pdf}\quad
+\includegraphics[totalheight=6cm]{git.pdf}
+}
+\end{center}
+\vspace{-0.5cm}
+\begin{center}
+\scalebox{0.65}
+{\includegraphics[totalheight=6cm]{trigger.pdf}
+}
+\end{center}
+}
+
+\section{创新点}
+\frame{\linespread{1.3} \frametitle{\secname}\transsplithorizontalin\small\song\rm
+%\begin{itemize}
+%\item 1) 在第一章节中, 不仅考虑了马氏切换模式, 随机发生的耦合, 随机耦合强度和随机发生的控制, 而且考虑了非线性的耦合结构. 相比与文献
+%\cite{eventaddav,A-linear-event-triggered,WSNs,eventcommunication,ChenT_event_triggered},我们的模型适应性更加广泛.
+%\item 2) 与文献\cite{eventaddav,WSNs,eventcommunication}不同, 连续模式和离散模式分别被推导, 在这两模式下又分别给出基于误差和指数阈值的激发规则.
+%\item 3) 在第二章节中, 在第一章节的基础上研究了部分转移概率未知的马氏复杂网络, 并构造出分散式和集中式的激发函数. 并且给出了激发时刻间隔的下界, 保证了发生Zeno 现象.
+%\item 4) 在第三章节中, 不仅考虑部分马氏链不能获得的情况, 同时也考虑了布朗运动噪声的对网络模型的影响.
+\begin{itemize}\setlength{\itemsep}{0cm}
+  \item
+  %线性耦合结构的复杂网络同步问题已经得到广泛研究, 并且具有较丰富的理论结果. 非线性耦合尽管有一些成果, 但也都是建立在连续采样或者周期采样的模式下, 这在一定程度上会加大网络节点间的通讯负荷.
+  %目前基于事件激发策略的控制方法研究非线性耦合关系马氏切换网络的理论结果还未有人提及.
+  本文在线性基础上, 研究了随机发生的非线性耦合、随机耦合强度以及事件激发控制模式共存的网络模型同步问题;
+  \item 在网络耦合关系随机性方面, 本文不仅以马氏切换模拟随机切换拓扑, 还考虑耦合关系在切换过程中的转移率是部分未知. 除此之外, 网络节点存时滞的情况也加入到模型中, 同时引进动态的同步目标. 设置合适的事件激发策略控制网络达到同步;
+  \item 针对部分转移概率未知时滞的网络模型, 给出事件激发区间的下界, 证实了Zeno现象不会发生;
+  \item 噪声是一项不可避免的随机因素, 而噪声一般对网络节点自身和网络节点间通讯都会造成影响. 相对于网络节点自身, 通讯干扰对网络稳定性影响更大. 很多研究者往往只考虑了节点自身动力学行为受到噪声扰动, 而本文在离散通讯模式下加入布朗运动模拟节点间的信号传输过程中受到噪声扰动.
+\end{itemize}
+}
+
+\section{总结与展望}
+\frame{\linespread{1.3} \frametitle{\secname}\transsplithorizontalin\small\song\rm
+\begin{itemize}
+\item 本文研究了多个复杂网络系统，包括了已知和部分未知转移率马尔科夫切换, 随机发生的耦合, 随机发生的控制, 随机耦合强度, 线性和非线性耦合, 以及带布朗运动噪声干扰的情形.
+\item 针对不同的模型, 本文分别设置不能类型的事件激发规则, 分别有离散和连续情形下的激发规则, 分布式和集中式激发规则.
+\item 在最后的章节中考虑到同步目标并非事先就确定下来的, 例如开会需要讨论研究意见和方法的时候, 并不是在开会前就知道所需要讨论的结果, 因此在这一章节所考虑的同步是目标是动态的同步目标, 具体的同步结果是由系统节点之间相互协调演化而得到的.
+\item 考虑同时具有马氏切换和随机扰动对系统的影响，噪声在我们的生活中无处不在，考虑噪声的影响会使我们的研究成果更贴近实际，更有实际应用价值.
+\end{itemize}
+}
+
+\frame{\linespread{1.3} \frametitle{\secname}\transsplithorizontalin\small\song\rm
+\begin{itemize}\setlength{\itemsep}{0cm}
+  \item 如何从单一网络控制方法应用到多重网络(即网络的网络)中;
+  \item 当网络的切换拓扑是带跳过程时又该如何构造控制方法使得网络同步;
+  \item 如何从现有的网络结构挖掘出缺失的信息;
+  \item 如何通过现有的节点状态信息预测节点在未来某时刻的行为特征.
+\end{itemize}
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+}
+
+\section{研究成果}
+\frame{ \frametitle{\secname}\transsplithorizontalin\scriptsize\rm\song
+\begin{thebibliography}{1}
+\tiny
+\bibitem .
+    {\textbf{Jiamu Zhou}}, Hailing Dong and Jianwen Feng. Event-triggered communication for synchronization of Markovian jump delayed complex networks with partially unknown transition rates[J]. {\em Applied Mathematics and Computation}, 2017, 293(2017):617-629.
+\bibitem .
+    Hailing Dong, {\textbf{Jiamu Zhou}} and Bingchang Wang. Synchronization of nonlinearly and stochastically coupled Markovian switching networks via event-triggered sampling[J]. {\em IEEE Transactions on Neural Networks and Learning Systems}, 2016, submitted.
+\end{thebibliography}
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+~\\
+}
+
+\section{}
+\frame{
+\begin{center}
+ \begin{center}
+  \includegraphics[width=4.5in]{end.pdf}
+\end{center}
+\end{center}
+}
+
+
+
+ \end{CJK*}
+\end{document}
